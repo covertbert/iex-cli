@@ -79,8 +79,8 @@ type Book struct {
 	} `json:"systemEvent"`
 }
 
-// CompanyBook returns the pricing infomation for a given company
-func CompanyBook(ticker string) {
+// QueryBook returns the pricing infomation for a given company
+func QueryBook(ticker string) {
 	b := &Book{}
 	body := iex.Query("/stock/" + ticker + "/book")
 
@@ -90,5 +90,5 @@ func CompanyBook(ticker string) {
 		fmt.Println(errors.New("Failed to unmarshal JSON body"))
 	}
 
-	fmt.Println(b)
+	fmt.Println(b.Quote.Symbol)
 }

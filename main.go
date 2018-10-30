@@ -27,18 +27,27 @@ var cliCommands = []cli.Command{
 	{
 		Name:    "book",
 		Aliases: []string{"b"},
-		Usage:   "view a company's book",
+		Usage:   "view a ticker's book - e.g. iex-cli book AAPL",
 		Action: func(c *cli.Context) error {
-			stock.CompanyBook(c.Args().First())
+			stock.QueryBook(c.Args().First())
 			return nil
 		},
 	},
 	{
 		Name:    "company",
 		Aliases: []string{"c"},
-		Usage:   "view a company's information",
+		Usage:   "view a ticker's general information - e.g. iex-cli company AAPL",
 		Action: func(c *cli.Context) error {
-			stock.CompanyInfo(c.Args().First())
+			stock.QueryCompany(c.Args().First())
+			return nil
+		},
+	},
+	{
+		Name:    "ohlc",
+		Aliases: []string{"ohlc"},
+		Usage:   "view a ticker's official open and close - e.g. iex-cli ohlc AAPL",
+		Action: func(c *cli.Context) error {
+			stock.QueryBook(c.Args().First())
 			return nil
 		},
 	},

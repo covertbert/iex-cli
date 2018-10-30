@@ -24,8 +24,8 @@ type Company struct {
 	Tags        []string `json:"tags"`
 }
 
-// CompanyInfo shows general info for a given company
-func CompanyInfo(ticker string) {
+// QueryCompany shows general info for a given company
+func QueryCompany(ticker string) {
 	c := &Company{}
 	body := iex.Query("/stock/" + ticker + "/company")
 	err := json.Unmarshal(body, &c)
