@@ -25,9 +25,18 @@ func main() {
 
 var cliCommands = []cli.Command{
 	{
+		Name:    "book",
+		Aliases: []string{"b"},
+		Usage:   "view a company's book",
+		Action: func(c *cli.Context) error {
+			stock.CompanyBook(c.Args().First())
+			return nil
+		},
+	},
+	{
 		Name:    "company",
-		Aliases: []string{"s"},
-		Usage:   "query a company",
+		Aliases: []string{"c"},
+		Usage:   "view a company's information",
 		Action: func(c *cli.Context) error {
 			stock.CompanyInfo(c.Args().First())
 			return nil

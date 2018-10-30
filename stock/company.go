@@ -12,24 +12,22 @@ import (
 
 // Company structure
 type Company struct {
-	Symbol      string
-	CompanyName string
-	Exchange    string
-	Industry    string
-	Website     string
-	Description string
-	CEO         string
-	IssueType   string
-	Sector      string
-	Tags        []string
+	Symbol      string   `json:"symbol"`
+	CompanyName string   `json:"companyName"`
+	Exchange    string   `json:"exchange"`
+	Industry    string   `json:"industry"`
+	Website     string   `json:"website"`
+	Description string   `json:"description"`
+	CEO         string   `json:"CEO"`
+	IssueType   string   `json:"issueType"`
+	Sector      string   `json:"sector"`
+	Tags        []string `json:"tags"`
 }
 
-// CompanyInfo renders info for a given company
+// CompanyInfo shows general info for a given company
 func CompanyInfo(ticker string) {
 	c := &Company{}
-
-	body := iex.QueryCompany(ticker)
-
+	body := iex.Query("/stock/" + ticker + "/company")
 	err := json.Unmarshal(body, &c)
 
 	if err != nil {
