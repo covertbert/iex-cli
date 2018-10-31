@@ -33,8 +33,13 @@ func QueryCompany(ticker string) {
 
 	if err != nil {
 		fmt.Println(errors.New("Failed to unmarshal JSON body"))
+		return
 	}
 
+	createTable(c).Render()
+}
+
+func createTable(c *Company) table.Writer {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{
@@ -59,5 +64,6 @@ func QueryCompany(ticker string) {
 	})
 	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
 	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
-	t.Render()
+
+	return t
 }
