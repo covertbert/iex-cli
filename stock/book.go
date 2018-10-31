@@ -88,6 +88,7 @@ func QueryBook(ticker string) {
 
 	if err != nil {
 		fmt.Println(errors.New("Failed to unmarshal JSON body"))
+		return
 	}
 
 	fmt.Println(b.Quote.Symbol)

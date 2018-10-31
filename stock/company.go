@@ -36,10 +36,6 @@ func QueryCompany(ticker string) {
 		return
 	}
 
-	createTable(c).Render()
-}
-
-func createTable(c *Company) table.Writer {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{
@@ -65,5 +61,5 @@ func createTable(c *Company) table.Writer {
 	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
 	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
 
-	return t
+	t.Render()
 }
