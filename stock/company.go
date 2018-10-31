@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/covertbert/iex-cli/iex"
+	"github.com/covertbert/iex-cli/utils"
 	"github.com/jedib0t/go-pretty/table"
 )
 
@@ -24,7 +25,7 @@ type Company struct {
 	Tags        []string `json:"tags"`
 }
 
-// QueryCompany shows general info for a given company
+// QueryCompany shows general info for a given company by symbol
 func QueryCompany(ticker string) {
 	c := &Company{}
 	body := iex.Query("/stock/" + ticker + "/company")
@@ -47,24 +48,16 @@ func QueryCompany(ticker string) {
 		"Sector",
 	})
 	t.AppendRow(table.Row{
-		replaceEmpty(c.Symbol),
-		replaceEmpty(c.CompanyName),
-		replaceEmpty(c.Exchange),
-		replaceEmpty(c.Industry),
-		replaceEmpty(c.Website),
-		replaceEmpty(c.CEO),
-		replaceEmpty(c.IssueType),
-		replaceEmpty(c.Sector),
+		utils.ReplaceEmpty(c.Symbol),
+		utils.ReplaceEmpty(c.CompanyName),
+		utils.ReplaceEmpty(c.Exchange),
+		utils.ReplaceEmpty(c.Industry),
+		utils.ReplaceEmpty(c.Website),
+		utils.ReplaceEmpty(c.CEO),
+		utils.ReplaceEmpty(c.IssueType),
+		utils.ReplaceEmpty(c.Sector),
 	})
 	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
 	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
 	t.Render()
-}
-
-func replaceEmpty(value string) string {
-	if len(value) > 0 {
-		return value
-	}
-
-	return "N/A"
 }

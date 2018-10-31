@@ -1,8 +1,8 @@
-package stock
+package utils
 
 import "testing"
 
-func Test_replaceEmpty(t *testing.T) {
+func TestReplaceEmpty(t *testing.T) {
 	type args struct {
 		value string
 	}
@@ -28,8 +28,8 @@ func Test_replaceEmpty(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := replaceEmpty(tt.args.value); got != tt.want {
-				t.Errorf("replaceEmpty() = %v, want %v", got, tt.want)
+			if got := ReplaceEmpty(tt.args.value); got != tt.want {
+				t.Errorf("ReplaceEmpty() = %v, want %v", got, tt.want)
 			}
 		})
 	}

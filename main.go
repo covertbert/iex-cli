@@ -27,7 +27,7 @@ var cliCommands = []cli.Command{
 	{
 		Name:    "book",
 		Aliases: []string{"b"},
-		Usage:   "view a ticker's book - e.g. iex-cli book AAPL",
+		Usage:   "view a symbol's book - e.g. iex-cli book AAPL",
 		Action: func(c *cli.Context) error {
 			stock.QueryBook(c.Args().First())
 			return nil
@@ -36,7 +36,7 @@ var cliCommands = []cli.Command{
 	{
 		Name:    "company",
 		Aliases: []string{"c"},
-		Usage:   "view a ticker's general information - e.g. iex-cli company AAPL",
+		Usage:   "view a symbol's general information - e.g. iex-cli company AAPL",
 		Action: func(c *cli.Context) error {
 			stock.QueryCompany(c.Args().First())
 			return nil
@@ -45,9 +45,9 @@ var cliCommands = []cli.Command{
 	{
 		Name:    "ohlc",
 		Aliases: []string{"ohlc"},
-		Usage:   "view a ticker's official open and close - e.g. iex-cli ohlc AAPL",
+		Usage:   "view a symbol's official open and close - e.g. iex-cli ohlc AAPL",
 		Action: func(c *cli.Context) error {
-			stock.QueryBook(c.Args().First())
+			stock.QueryOHLC(c.Args().First())
 			return nil
 		},
 	},
