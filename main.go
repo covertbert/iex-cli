@@ -27,10 +27,41 @@ var cliCommands = []cli.Command{
 	{
 		Name:    "book",
 		Aliases: []string{"b"},
-		Usage:   "view a symbol's book - e.g. iex-cli book AAPL",
-		Action: func(c *cli.Context) error {
-			stock.QueryBook(c.Args().First())
-			return nil
+		Usage:   "view a symbol's book",
+		Subcommands: []cli.Command{
+			{
+				Name:    "quote",
+				Aliases: []string{"q"},
+				Usage:   "view quote",
+				Action: func(c *cli.Context) error {
+					stock.QueryBook(c.Args().First(), "quote")
+					return nil
+				},
+			},
+			{
+				Name:  "bids",
+				Usage: "view bids",
+				Action: func(c *cli.Context) error {
+					stock.QueryBook(c.Args().First(), "bids")
+					return nil
+				},
+			},
+			{
+				Name:  "asks",
+				Usage: "view asks",
+				Action: func(c *cli.Context) error {
+					stock.QueryBook(c.Args().First(), "asks")
+					return nil
+				},
+			},
+			{
+				Name:  "trades",
+				Usage: "view trades",
+				Action: func(c *cli.Context) error {
+					stock.QueryBook(c.Args().First(), "trades")
+					return nil
+				},
+			},
 		},
 	},
 	{

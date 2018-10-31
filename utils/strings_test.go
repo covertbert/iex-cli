@@ -2,7 +2,7 @@ package utils
 
 import "testing"
 
-func TestReplaceEmpty(t *testing.T) {
+func TestReplaceEmptyValue(t *testing.T) {
 	type args struct {
 		value string
 	}
@@ -19,6 +19,13 @@ func TestReplaceEmpty(t *testing.T) {
 			want: "N/A",
 		},
 		{
+			name: "Integer",
+			args: args{
+				value: 1,
+			},
+			want: "1",
+		},
+		{
 			name: "Not empty",
 			args: args{
 				value: "Chicken",
@@ -28,8 +35,8 @@ func TestReplaceEmpty(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ReplaceEmpty(tt.args.value); got != tt.want {
-				t.Errorf("ReplaceEmpty() = %v, want %v", got, tt.want)
+			if got := ReplaceEmptyValue(tt.args.value); got != tt.want {
+				t.Errorf("ReplaceEmptyValue() = %v, want %v", got, tt.want)
 			}
 		})
 	}

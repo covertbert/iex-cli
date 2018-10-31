@@ -49,14 +49,14 @@ func QueryCompany(ticker string) {
 		"Sector",
 	})
 	t.AppendRow(table.Row{
-		utils.ReplaceEmpty(c.Symbol),
-		utils.ReplaceEmpty(c.CompanyName),
-		utils.ReplaceEmpty(c.Exchange),
-		utils.ReplaceEmpty(c.Industry),
-		utils.ReplaceEmpty(c.Website),
-		utils.ReplaceEmpty(c.CEO),
-		utils.ReplaceEmpty(c.IssueType),
-		utils.ReplaceEmpty(c.Sector),
+		utils.ReplaceEmptyValue(c.Symbol),
+		utils.ReplaceEmptyValue(c.CompanyName),
+		utils.ReplaceEmptyValue(c.Exchange),
+		utils.ReplaceEmptyValue(c.Industry),
+		utils.ReplaceEmptyValue(c.Website),
+		utils.ReplaceEmptyValue(c.CEO),
+		utils.ReplaceEmptyValue(c.IssueType),
+		utils.ReplaceEmptyValue(c.Sector),
 	})
 	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
 	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)

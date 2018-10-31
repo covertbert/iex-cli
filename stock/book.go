@@ -4,8 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
 
 	"github.com/covertbert/iex-cli/iex"
+	"github.com/covertbert/iex-cli/utils"
+	"github.com/jedib0t/go-pretty/table"
 )
 
 // Book structure
@@ -80,7 +83,7 @@ type Book struct {
 }
 
 // QueryBook returns the pricing infomation for a given company
-func QueryBook(ticker string) {
+func QueryBook(ticker string, subsection string) {
 	b := &Book{}
 	body := iex.Query("/stock/" + ticker + "/book")
 
@@ -91,5 +94,144 @@ func QueryBook(ticker string) {
 		return
 	}
 
-	fmt.Println(b.Quote.Symbol)
+	switch subsection {
+	case "quote":
+		quoteTable(*b).Render()
+	case "bids":
+		bidTable(*b).Render()
+	case "asks":
+		askTable(*b).Render()
+	case "trades":
+		tradeTable(*b).Render()
+	}
+}
+
+func quoteTable(b Book) table.Writer {
+	t := table.NewWriter()
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"Quote"})
+	t.AppendRows([]table.Row{
+		{"Symbol", b.Quote.Symbol},
+		{"CompanyName", b.Quote.CompanyName},
+		{"PrimaryExchange", b.Quote.PrimaryExchange},
+		{"Sector", utils.ReplaceEmptyValue(b.Quote.Sector)},
+		{"CalculationPrice", b.Quote.CalculationPrice},
+		{"Open", b.Quote.Open},
+		{"OpenTime", b.Quote.OpenTime},
+		{"Close", b.Quote.Close},
+		{"CloseTime", b.Quote.CloseTime},
+		{"High", b.Quote.High},
+		{"Low", b.Quote.Low},
+		{"LatestPrice", b.Quote.LatestPrice},
+		{"LatestSource", b.Quote.LatestSource},
+		{"LatestTime", b.Quote.LatestTime},
+		{"LatestUpdate", b.Quote.LatestUpdate},
+		{"LatestVolume", b.Quote.LatestVolume},
+		{"IexRealtimePrice", b.Quote.IexRealtimePrice},
+		{"IexRealtimeSize", b.Quote.IexRealtimeSize},
+		{"IexLastUpdated", b.Quote.IexLastUpdated},
+		{"DelayedPrice", b.Quote.DelayedPrice},
+		{"DelayedPriceTime", b.Quote.DelayedPriceTime},
+		{"ExtendedPrice", b.Quote.ExtendedPrice},
+		{"ExtendedChange", b.Quote.ExtendedChange},
+		{"ExtendedChangePercent", b.Quote.ExtendedChangePercent},
+		{"ExtendedPriceTime", b.Quote.ExtendedPriceTime},
+		{"PreviousClose", b.Quote.PreviousClose},
+		{"Change", b.Quote.Change},
+		{"ChangePercent", b.Quote.ChangePercent},
+		{"IexMarketPercent", b.Quote.IexMarketPercent},
+		{"IexVolume", b.Quote.IexVolume},
+		{"AvgTotalVolume", b.Quote.AvgTotalVolume},
+		{"IexBidPrice", b.Quote.IexBidPrice},
+		{"IexBidSize", b.Quote.IexBidSize},
+		{"IexAskPrice", b.Quote.IexAskPrice},
+		{"IexAskSize", b.Quote.IexAskSize},
+		{"MarketCap", b.Quote.MarketCap},
+		{"PeRatio", b.Quote.PeRatio},
+		{"Week52High", b.Quote.Week52High},
+		{"Week52Low", b.Quote.Week52Low},
+		{"YtdChange", b.Quote.YtdChange},
+	})
+	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
+	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
+	fmt.Println("\r")
+	return t
+}
+
+func bidTable(b Book) table.Writer {
+	t := table.NewWriter()
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"Bids"})
+
+	for i, bid := range b.Bids {
+		if i == 0 {
+			t.AppendRows([]table.Row{
+				{"Timestamp", "Price", "Size"},
+				{utils.UNIXToHumanReadable(bid.Timestamp), bid.Price, bid.Size},
+			})
+		} else {
+			t.AppendRows([]table.Row{
+				{""},
+				{"Timestamp", "Price", "Size"},
+				{utils.UNIXToHumanReadable(bid.Timestamp), bid.Price, bid.Size},
+			})
+		}
+	}
+
+	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
+	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
+	fmt.Println("\r")
+	return t
+}
+
+func askTable(b Book) table.Writer {
+	t := table.NewWriter()
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"Asks"})
+
+	for i, ask := range b.Asks {
+		if i == 0 {
+			t.AppendRows([]table.Row{
+				{"Timestamp", "Price", "Size"},
+				{utils.UNIXToHumanReadable(ask.Timestamp), ask.Price, ask.Size},
+			})
+		} else {
+			t.AppendRows([]table.Row{
+				{""},
+				{"Timestamp", "Price", "Size"},
+				{utils.UNIXToHumanReadable(ask.Timestamp), ask.Price, ask.Size},
+			})
+		}
+	}
+
+	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
+	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
+	fmt.Println("\r")
+	return t
+}
+
+func tradeTable(b Book) table.Writer {
+	t := table.NewWriter()
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"Asks"})
+
+	for i, trade := range b.Trades {
+		if i == 0 {
+			t.AppendRows([]table.Row{
+				{"Price", "Size", "TradeID", "IsISO", "IsOddLot", "IsOutsideRegularHours", "IsSinglePriceCross", "IsTradeThroughExempt", "Timestamp"},
+				{trade.Price, trade.Size, trade.TradeID, trade.IsISO, trade.IsOddLot, trade.IsOutsideRegularHours, trade.IsSinglePriceCross, trade.IsTradeThroughExempt, utils.UNIXToHumanReadable(trade.Timestamp)},
+			})
+		} else {
+			t.AppendRows([]table.Row{
+				{""},
+				{"Price", "Size", "TradeID", "IsISO", "IsOddLot", "IsOutsideRegularHours", "IsSinglePriceCross", "IsTradeThroughExempt", "Timestamp"},
+				{trade.Price, trade.Size, trade.TradeID, trade.IsISO, trade.IsOddLot, trade.IsOutsideRegularHours, trade.IsSinglePriceCross, trade.IsTradeThroughExempt, utils.UNIXToHumanReadable(trade.Timestamp)},
+			})
+		}
+	}
+
+	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
+	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
+	fmt.Println("\r")
+	return t
 }
