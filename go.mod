@@ -3,6 +3,7 @@ module github.com/covertbert/iex-cli
 require (
 	github.com/creasty/defaults v1.2.1
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/dustin/go-humanize v1.0.0
 	github.com/fatih/color v1.7.0
 	github.com/jedib0t/go-pretty v4.0.0+incompatible
 	github.com/mattn/go-colorable v0.0.9 // indirect

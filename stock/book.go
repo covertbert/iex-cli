@@ -8,6 +8,7 @@ import (
 	"github.com/covertbert/iex-cli/errors"
 	"github.com/covertbert/iex-cli/iex"
 	"github.com/covertbert/iex-cli/utils"
+	"github.com/dustin/go-humanize"
 	"github.com/jedib0t/go-pretty/table"
 )
 
@@ -117,7 +118,7 @@ func quoteTable(b Book) table.Writer {
 	t.AppendRows([]table.Row{
 		{"Symbol", b.Quote.Symbol},
 		{"CompanyName", b.Quote.CompanyName},
-		{"Market Cap", b.Quote.MarketCap},
+		{"Market Cap", humanize.Comma(b.Quote.MarketCap)},
 		{"PrimaryExchange", b.Quote.PrimaryExchange},
 		{"Sector", utils.ReplaceEmptyValue(b.Quote.Sector)},
 		{"CalculationPrice", b.Quote.CalculationPrice},
