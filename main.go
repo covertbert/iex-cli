@@ -8,21 +8,6 @@ import (
 	"github.com/urfave/cli"
 )
 
-func main() {
-	app := cli.NewApp()
-
-	app.Name = "iex-cli"
-	app.Usage = "Stock market information in the command line via iex"
-
-	app.Commands = cliCommands
-
-	err := app.Run(os.Args)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 var cliCommands = []cli.Command{
 	{
 		Name:    "book",
@@ -94,4 +79,19 @@ var cliCommands = []cli.Command{
 			return nil
 		},
 	},
+}
+
+func main() {
+	app := cli.NewApp()
+
+	app.Name = "iex-cli"
+	app.Usage = "Stock market information in the command line via iex"
+
+	app.Commands = cliCommands
+
+	err := app.Run(os.Args)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }

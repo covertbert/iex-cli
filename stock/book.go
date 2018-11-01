@@ -36,8 +36,8 @@ type Book struct {
 		DelayedPrice          float64 `json:"delayedPrice"`
 		DelayedPriceTime      int64   `json:"delayedPriceTime"`
 		ExtendedPrice         float64 `json:"extendedPrice"`
-		ExtendedChange        int     `json:"extendedChange"`
-		ExtendedChangePercent int     `json:"extendedChangePercent"`
+		ExtendedChange        float64 `json:"extendedChange"`
+		ExtendedChangePercent float64 `json:"extendedChangePercent"`
 		ExtendedPriceTime     int64   `json:"extendedPriceTime"`
 		PreviousClose         float64 `json:"previousClose"`
 		Change                float64 `json:"change"`
