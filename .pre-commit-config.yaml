@@ -4,8 +4,3 @@
     - id: go-fmt
     - id: go-vet
     - id: go-lint
-    - id: validate-toml
-    - id: g
-    - id: gometalinter
-    - id: golangci-lint
-    - id: go-critic
