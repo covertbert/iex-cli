@@ -27,7 +27,7 @@ type OHLC struct {
 // QueryOHLC returns the official open and close for a give symbol.
 func QueryOHLC(ticker string) {
 	if len(ticker) < 1 {
-		errors.ErrorNS("Please provide command line argument")
+		errors.ErrorNoArgs()
 		return
 	}
 

@@ -17,6 +17,18 @@ func TestBookQuote(t *testing.T) {
 		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Symbol")
 	}
 }
+
+func TestBookQuoteNoArgs(t *testing.T) {
+	testcli.Run("../iex-cli", "book", "quote")
+
+	if !testcli.Success() {
+		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
+	}
+
+	if !testcli.StdoutContains("Error: No argument supplied") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Error: No argument supplied")
+	}
+}
 func TestBookBids(t *testing.T) {
 	testcli.Run("../iex-cli", "book", "bids", "AAPL")
 
@@ -26,6 +38,18 @@ func TestBookBids(t *testing.T) {
 
 	if !testcli.StdoutContains("Timestamp") {
 		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Timestamp")
+	}
+}
+
+func TestBookBidsNoArgs(t *testing.T) {
+	testcli.Run("../iex-cli", "book", "bids")
+
+	if !testcli.Success() {
+		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
+	}
+
+	if !testcli.StdoutContains("Error: No argument supplied") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Error: No argument supplied")
 	}
 }
 
@@ -42,6 +66,18 @@ func TestBookAsks(t *testing.T) {
 	}
 }
 
+func TestBookAsksNoArgs(t *testing.T) {
+	testcli.Run("../iex-cli", "book", "asks")
+
+	if !testcli.Success() {
+		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
+	}
+
+	if !testcli.StdoutContains("Error: No argument supplied") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Error: No argument supplied")
+	}
+}
+
 func TestBookTrades(t *testing.T) {
 	testcli.Run("../iex-cli", "book", "trades", "AAPL")
 
@@ -51,5 +87,17 @@ func TestBookTrades(t *testing.T) {
 
 	if !testcli.StdoutContains("Timestamp") {
 		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Timestamp")
+	}
+}
+
+func TestBookTradesNoArgs(t *testing.T) {
+	testcli.Run("../iex-cli", "book", "trades")
+
+	if !testcli.Success() {
+		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
+	}
+
+	if !testcli.StdoutContains("Error: No argument supplied") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Error: No argument supplied")
 	}
 }

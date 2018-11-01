@@ -19,3 +19,9 @@ func ErrorNS(description string) {
 	red := color.New(color.FgRed).SprintFunc()
 	fmt.Printf("%s\n", red("Error: "+description))
 }
+
+// ErrorNoArgs handles errors with no stack trace
+func ErrorNoArgs() {
+	red := color.New(color.FgRed).SprintFunc()
+	fmt.Printf("%s\n", red("Error: No argument supplied"))
+}

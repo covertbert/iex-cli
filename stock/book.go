@@ -84,6 +84,11 @@ type Book struct {
 
 // QueryBook returns the pricing infomation for a given company
 func QueryBook(ticker string, subsection string) {
+	if len(ticker) < 1 {
+		errors.ErrorNoArgs()
+		return
+	}
+
 	b := &Book{}
 	body := iex.Query("/stock/" + ticker + "/book")
 

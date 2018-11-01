@@ -26,6 +26,11 @@ type Company struct {
 
 // QueryCompany shows general info for a given company by symbol
 func QueryCompany(ticker string) {
+	if len(ticker) < 1 {
+		errors.ErrorNoArgs()
+		return
+	}
+
 	c := &Company{}
 	body := iex.Query("/stock/" + ticker + "/company")
 	err := json.Unmarshal(body, &c)
