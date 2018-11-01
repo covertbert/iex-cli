@@ -8,6 +8,7 @@ require (
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/rendon/testcli v0.0.0-20161027181003-6283090d169f
 	github.com/stretchr/testify v1.2.2
 	github.com/timpalpant/go-iex v1.0.0
 	github.com/urfave/cli v1.20.0

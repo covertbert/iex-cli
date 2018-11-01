@@ -1,43 +1,23 @@
 package stock
 
-import "testing"
+import (
+	"testing"
 
-func TestQueryCompany(t *testing.T) {
-	type args struct {
-		ticker string
+	"github.com/rendon/testcli"
+)
+
+func TestCompany(t *testing.T) {
+	testcli.Run("../iex-cli", "company", "AAPL")
+
+	if !testcli.Success() {
+		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
 	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		{
-			name: "AAPL",
-			args: args{
-				ticker: "AAPL",
-			},
-		},
-		{
-			name: "QQQ",
-			args: args{
-				ticker: "QQQ",
-			},
-		},
-		{
-			name: "SYX",
-			args: args{
-				ticker: "SYX",
-			},
-		},
-		{
-			name: "KEM",
-			args: args{
-				ticker: "KEM",
-			},
-		},
+
+	if !testcli.StdoutContains("COMPANY NAME") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "COMPANY NAME")
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			QueryCompany(tt.args.ticker)
-		})
+
+	if !testcli.StdoutContains("EXCHANGE") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "EXCHANGE")
 	}
 }
