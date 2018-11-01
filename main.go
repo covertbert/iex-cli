@@ -12,7 +12,7 @@ func main() {
 	app := cli.NewApp()
 
 	app.Name = "iex-cli"
-	app.Usage = "Stock market information in the command line via iex"
+	app.Usage = "Stock market information in the command line via iex."
 	app.Commands = commands.CliCommands
 
 	err := app.Run(os.Args)
