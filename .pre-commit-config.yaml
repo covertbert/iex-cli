@@ -1,5 +1,6 @@
 - repo: git://github.com/dnephin/pre-commit-golang
   sha: HEAD
+  args: [--all-files]
   hooks:
     - id: go-fmt
     - id: go-vet
