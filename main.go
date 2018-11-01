@@ -77,6 +77,15 @@ var cliCommands = []cli.Command{
 		},
 	},
 	{
+		Name:    "crypto",
+		Aliases: []string{"cr"},
+		Usage:   "view a symbol's general information - e.g. iex-cli company AAPL",
+		Action: func(c *cli.Context) error {
+			stock.QueryCompany(c.Args().First())
+			return nil
+		},
+	},
+	{
 		Name:    "ohlc",
 		Aliases: []string{"ohlc"},
 		Usage:   "view a symbol's official open and close - e.g. iex-cli ohlc AAPL",

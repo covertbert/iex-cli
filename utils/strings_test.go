@@ -19,13 +19,6 @@ func TestReplaceEmptyValue(t *testing.T) {
 			want: "N/A",
 		},
 		{
-			name: "Integer",
-			args: args{
-				value: 1,
-			},
-			want: "1",
-		},
-		{
 			name: "Not empty",
 			args: args{
 				value: "Chicken",

@@ -2,10 +2,10 @@ package stock
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"os"
 
+	"github.com/covertbert/iex-cli/errors"
 	"github.com/covertbert/iex-cli/iex"
 	"github.com/covertbert/iex-cli/utils"
 	"github.com/jedib0t/go-pretty/table"
@@ -90,8 +90,7 @@ func QueryBook(ticker string, subsection string) {
 	err := json.Unmarshal(body, &b)
 
 	if err != nil {
-		fmt.Println(errors.New("Failed to unmarshal JSON body"))
-		return
+		errors.Error(err, "Failed to unmarshal JSON body")
 	}
 
 	switch subsection {
