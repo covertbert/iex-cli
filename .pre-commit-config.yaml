@@ -2,5 +2,6 @@
   sha: HEAD
   hooks:
     - id: go-fmt
+      files: 'main.go'
     - id: go-vet
     - id: go-lint
