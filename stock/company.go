@@ -2,10 +2,9 @@ package stock
 
 import (
 	"encoding/json"
-	"errors"
-	"fmt"
 	"os"
 
+	"github.com/covertbert/iex-cli/errors"
 	"github.com/covertbert/iex-cli/iex"
 	"github.com/covertbert/iex-cli/utils"
 	"github.com/jedib0t/go-pretty/table"
@@ -32,8 +31,7 @@ func QueryCompany(ticker string) {
 	err := json.Unmarshal(body, &c)
 
 	if err != nil {
-		fmt.Println(errors.New("Failed to unmarshal JSON body"))
-		return
+		errors.Error(err, "Failed to unmarshal JSON body")
 	}
 
 	t := table.NewWriter()

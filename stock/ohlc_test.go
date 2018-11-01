@@ -1,43 +1,35 @@
 package stock
 
-import "testing"
+import (
+	"testing"
 
-func TestQueryOHLC(t *testing.T) {
-	type args struct {
-		ticker string
+	"github.com/rendon/testcli"
+)
+
+func TestOHLC(t *testing.T) {
+	testcli.Run("../iex-cli", "ohlc", "AAPL")
+
+	if !testcli.Success() {
+		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
 	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		{
-			name: "AAPL",
-			args: args{
-				ticker: "AAPL",
-			},
-		},
-		{
-			name: "QQQ",
-			args: args{
-				ticker: "QQQ",
-			},
-		},
-		{
-			name: "SYX",
-			args: args{
-				ticker: "SYX",
-			},
-		},
-		{
-			name: "KEM",
-			args: args{
-				ticker: "KEM",
-			},
-		},
+
+	if !testcli.StdoutContains("Key") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Key")
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			QueryOHLC(tt.args.ticker)
-		})
+
+	if !testcli.StdoutContains("Open") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Open")
+	}
+
+	if !testcli.StdoutContains("Close") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Close")
+	}
+
+	if !testcli.StdoutContains("High") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "High")
+	}
+
+	if !testcli.StdoutContains("Low") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Low")
 	}
 }

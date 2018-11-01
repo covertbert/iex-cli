@@ -1,18 +1,31 @@
 package stock
 
-import "testing"
+import (
+	"testing"
 
-func TestQueryCrypto(t *testing.T) {
-	tests := []struct {
-		name string
-	}{
-		{
-			name: "Hello",
-		},
+	"github.com/rendon/testcli"
+)
+
+func TestCrypto(t *testing.T) {
+	testcli.Run("../iex-cli", "crypto")
+
+	if !testcli.Success() {
+		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			QueryCrypto()
-		})
+
+	if !testcli.StdoutContains("Symbol") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Symbol")
+	}
+
+	if !testcli.StdoutContains("High") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "High")
+	}
+
+	if !testcli.StdoutContains("Low") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Low")
+	}
+
+	if !testcli.StdoutContains("Latest") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Latest")
 	}
 }
