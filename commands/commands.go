@@ -62,9 +62,18 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "crypto",
 		Aliases: []string{"cr"},
-		Usage:   "view a symbol's general information - e.g. iex-cli company AAPL",
+		Usage:   "view cryptocurrency market information - e.g. iex-cli crypto",
 		Action: func(c *cli.Context) error {
 			stock.QueryCrypto()
+			return nil
+		},
+	},
+	{
+		Name:    "delayed",
+		Aliases: []string{"d"},
+		Usage:   "view a symbol's 15 minute delayed market quote - e.g. iex-cli delayed AAPL",
+		Action: func(c *cli.Context) error {
+			stock.QueryDelayed(c.Args().First())
 			return nil
 		},
 	},
