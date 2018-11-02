@@ -25,3 +25,10 @@ func ErrorNoArgs() {
 	red := color.New(color.FgRed).SprintFunc()
 	fmt.Printf("%s\n", red("Error: No argument supplied"))
 }
+
+// ErrorUnmarshal handles errors with no stack trace
+func ErrorUnmarshal(err error) {
+	red := color.New(color.FgRed).SprintFunc()
+	fmt.Printf("%s\n", red("Error: Failed to unmarshal JSON body"))
+	panic(err)
+}
