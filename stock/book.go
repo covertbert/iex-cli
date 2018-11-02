@@ -83,7 +83,7 @@ type Book struct {
 	} `json:"systemEvent"`
 }
 
-// QueryBook returns the pricing infomation for a given company
+// QueryBook displays the pricing infomation for a given company
 func QueryBook(symbol string, subsection string) {
 	if len(symbol) < 1 {
 		errors.Error("No argument supplied")

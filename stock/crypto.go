@@ -7,7 +7,6 @@ import (
 
 	"github.com/covertbert/iex-cli/errors"
 	"github.com/covertbert/iex-cli/iex"
-	"github.com/covertbert/iex-cli/utils"
 	"github.com/jedib0t/go-pretty/table"
 	"github.com/jedib0t/go-pretty/text"
 )
@@ -60,7 +59,7 @@ type Crypto []struct {
 	AskSize               float64 `json:"askSize"`
 }
 
-// QueryCrypto returns quotes for all Cryptocurrencies supported by IEX
+// QueryCrypto displays quotes for all Cryptocurrencies supported by IEX
 func QueryCrypto() {
 	c := &Crypto{}
 	body := iex.Query("/stock/market/crypto")
@@ -87,7 +86,7 @@ func QueryCrypto() {
 
 	for _, crypto := range *c {
 		t.AppendRow(table.Row{
-			utils.ReplaceEmptyValue(crypto.Symbol),
+			crypto.Symbol,
 			fmt.Sprintf("%.3f", crypto.High),
 			fmt.Sprintf("%.3f", crypto.Low),
 			fmt.Sprintf("%.3f", crypto.LatestPrice),

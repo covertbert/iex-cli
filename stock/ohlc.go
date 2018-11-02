@@ -24,11 +24,10 @@ type OHLC struct {
 	Low  float64 `json:"low"`
 }
 
-// QueryOHLC returns the official open and close for a give symbol.
+// QueryOHLC displays the official open and close for a give symbol.
 func QueryOHLC(symbol string) {
 	if len(symbol) < 1 {
 		errors.Error("No argument supplied")
-		return
 	}
 
 	o := &OHLC{}

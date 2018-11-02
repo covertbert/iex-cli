@@ -24,11 +24,10 @@ type Company struct {
 	Tags        []string `json:"tags"`
 }
 
-// QueryCompany shows general info for a given company by symbol
+// QueryCompany displays general info for a given company by symbol
 func QueryCompany(symbol string) {
 	if len(symbol) < 1 {
 		errors.Error("No argument supplied")
-		return
 	}
 
 	c := &Company{}
