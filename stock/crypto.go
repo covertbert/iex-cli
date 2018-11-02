@@ -67,7 +67,7 @@ func QueryCrypto() {
 	err := json.Unmarshal(body, &c)
 
 	if err != nil {
-		errors.ErrorUnmarshal(err)
+		errors.Error("Failed to unmarshal")
 	}
 
 	t := table.NewWriter()

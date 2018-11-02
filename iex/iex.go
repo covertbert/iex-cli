@@ -1,11 +1,11 @@
 package iex
 
 import (
-	"errors"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"time"
+
+	"github.com/covertbert/iex-cli/errors"
 )
 
 const baseURL = "https://api.iextrading.com/1.0/"
@@ -17,13 +17,17 @@ func Query(path string) []byte {
 	resp, err := httpClient.Get(baseURL + path)
 
 	if err != nil {
-		fmt.Println(errors.New("HTTP request failed"))
+		errors.Error("API request failed")
+	}
+
+	if resp.StatusCode != 200 {
+		errors.Error("The symbol you have passed does not exist")
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 
 	if err != nil {
-		fmt.Println(errors.New("Failed to read response body"))
+		errors.Error("Failed to read response body")
 	}
 
 	return body

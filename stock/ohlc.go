@@ -27,7 +27,7 @@ type OHLC struct {
 // QueryOHLC returns the official open and close for a give symbol.
 func QueryOHLC(ticker string) {
 	if len(ticker) < 1 {
-		errors.ErrorNoArgs()
+		errors.Error("No argument supplied")
 		return
 	}
 
@@ -36,7 +36,7 @@ func QueryOHLC(ticker string) {
 	err := json.Unmarshal(body, &o)
 
 	if err != nil {
-		errors.ErrorUnmarshal(err)
+		errors.Error("Failed to unmarshal")
 	}
 
 	t := table.NewWriter()

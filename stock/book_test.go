@@ -21,10 +21,6 @@ func TestBookQuote(t *testing.T) {
 func TestBookQuoteNoArgs(t *testing.T) {
 	testcli.Run("../iex-cli", "book", "quote")
 
-	if !testcli.Success() {
-		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
-	}
-
 	if !testcli.StdoutContains("Error: No argument supplied") {
 		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Error: No argument supplied")
 	}
@@ -44,10 +40,6 @@ func TestBookBids(t *testing.T) {
 func TestBookBidsNoArgs(t *testing.T) {
 	testcli.Run("../iex-cli", "book", "bids")
 
-	if !testcli.Success() {
-		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
-	}
-
 	if !testcli.StdoutContains("Error: No argument supplied") {
 		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Error: No argument supplied")
 	}
@@ -55,7 +47,6 @@ func TestBookBidsNoArgs(t *testing.T) {
 
 func TestBookAsks(t *testing.T) {
 	testcli.Run("../iex-cli", "book", "asks", "AAPL")
-	// testcli.Run("./iex-cli", "book", "asks", "AAPL")
 
 	if !testcli.Success() {
 		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
@@ -68,10 +59,6 @@ func TestBookAsks(t *testing.T) {
 
 func TestBookAsksNoArgs(t *testing.T) {
 	testcli.Run("../iex-cli", "book", "asks")
-
-	if !testcli.Success() {
-		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
-	}
 
 	if !testcli.StdoutContains("Error: No argument supplied") {
 		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Error: No argument supplied")
@@ -92,10 +79,6 @@ func TestBookTrades(t *testing.T) {
 
 func TestBookTradesNoArgs(t *testing.T) {
 	testcli.Run("../iex-cli", "book", "trades")
-
-	if !testcli.Success() {
-		t.Fatalf("Expected to succeed, but failed: %s", testcli.Error())
-	}
 
 	if !testcli.StdoutContains("Error: No argument supplied") {
 		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Error: No argument supplied")

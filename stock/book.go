@@ -86,8 +86,7 @@ type Book struct {
 // QueryBook returns the pricing infomation for a given company
 func QueryBook(ticker string, subsection string) {
 	if len(ticker) < 1 {
-		errors.ErrorNoArgs()
-		return
+		errors.Error("No argument supplied")
 	}
 
 	b := &Book{}
@@ -96,7 +95,7 @@ func QueryBook(ticker string, subsection string) {
 	err := json.Unmarshal(body, &b)
 
 	if err != nil {
-		errors.ErrorUnmarshal(err)
+		errors.Error("Failed to unmarshal")
 	}
 
 	switch subsection {

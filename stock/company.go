@@ -27,7 +27,7 @@ type Company struct {
 // QueryCompany shows general info for a given company by symbol
 func QueryCompany(ticker string) {
 	if len(ticker) < 1 {
-		errors.ErrorNoArgs()
+		errors.Error("No argument supplied")
 		return
 	}
 
@@ -36,7 +36,7 @@ func QueryCompany(ticker string) {
 	err := json.Unmarshal(body, &c)
 
 	if err != nil {
-		errors.ErrorUnmarshal(err)
+		errors.Error("Failed to unmarshal")
 	}
 
 	t := table.NewWriter()
