@@ -25,14 +25,14 @@ type OHLC struct {
 }
 
 // QueryOHLC returns the official open and close for a give symbol.
-func QueryOHLC(ticker string) {
-	if len(ticker) < 1 {
+func QueryOHLC(symbol string) {
+	if len(symbol) < 1 {
 		errors.Error("No argument supplied")
 		return
 	}
 
 	o := &OHLC{}
-	body := iex.Query("/stock/" + ticker + "/ohlc")
+	body := iex.Query("/stock/" + symbol + "/ohlc")
 	err := json.Unmarshal(body, &o)
 
 	if err != nil {

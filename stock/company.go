@@ -25,14 +25,14 @@ type Company struct {
 }
 
 // QueryCompany shows general info for a given company by symbol
-func QueryCompany(ticker string) {
-	if len(ticker) < 1 {
+func QueryCompany(symbol string) {
+	if len(symbol) < 1 {
 		errors.Error("No argument supplied")
 		return
 	}
 
 	c := &Company{}
-	body := iex.Query("/stock/" + ticker + "/company")
+	body := iex.Query("/stock/" + symbol + "/company")
 	err := json.Unmarshal(body, &c)
 
 	if err != nil {

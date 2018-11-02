@@ -84,13 +84,13 @@ type Book struct {
 }
 
 // QueryBook returns the pricing infomation for a given company
-func QueryBook(ticker string, subsection string) {
-	if len(ticker) < 1 {
+func QueryBook(symbol string, subsection string) {
+	if len(symbol) < 1 {
 		errors.Error("No argument supplied")
 	}
 
 	b := &Book{}
-	body := iex.Query("/stock/" + ticker + "/book")
+	body := iex.Query("/stock/" + symbol + "/book")
 
 	err := json.Unmarshal(body, &b)
 
