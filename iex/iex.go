@@ -17,7 +17,7 @@ func Query(path string) []byte {
 	resp, err := httpClient.Get(baseURL + path)
 
 	if err != nil {
-		errors.Error("API request failed")
+		errors.Error("HTTP request to API failed")
 	}
 
 	if resp.StatusCode != 200 {
