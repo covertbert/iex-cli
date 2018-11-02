@@ -10,7 +10,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "book",
 		Aliases: []string{"b"},
-		Usage:   "view a symbol's book - Requires subcommand and symbol e.g. iex-cli book quote AAPL",
+		Usage:   "view a symbol's book",
 		Subcommands: []cli.Command{
 			{
 				Name:    "quote",
@@ -53,7 +53,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "company",
 		Aliases: []string{"c"},
-		Usage:   "view a symbol's general information - e.g. iex-cli company AAPL",
+		Usage:   "view a symbol's general information",
 		Action: func(c *cli.Context) error {
 			stock.QueryCompany(c.Args().First())
 			return nil
@@ -62,7 +62,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "crypto",
 		Aliases: []string{"cr"},
-		Usage:   "view cryptocurrency market information - e.g. iex-cli crypto",
+		Usage:   "view cryptocurrency market information",
 		Action: func(c *cli.Context) error {
 			stock.QueryCrypto()
 			return nil
@@ -71,16 +71,25 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "delayed",
 		Aliases: []string{"d"},
-		Usage:   "view a symbol's 15 minute delayed market quote - e.g. iex-cli delayed AAPL",
+		Usage:   "view a symbol's 15 minute delayed market quote",
 		Action: func(c *cli.Context) error {
 			stock.QueryDelayed(c.Args().First())
 			return nil
 		},
 	},
 	{
+		Name:    "news",
+		Aliases: []string{"n"},
+		Usage:   "view stock market news",
+		Action: func(c *cli.Context) error {
+			stock.QueryNews(c.Args().First())
+			return nil
+		},
+	},
+	{
 		Name:    "ohlc",
 		Aliases: []string{"ohlc"},
-		Usage:   "view a symbol's official open and close - e.g. iex-cli ohlc AAPL",
+		Usage:   "view a symbol's official open and close",
 		Action: func(c *cli.Context) error {
 			stock.QueryOHLC(c.Args().First())
 			return nil
