@@ -8,4 +8,5 @@ build:
 	go build
 
 test:
+	go build
 	go test ./...
