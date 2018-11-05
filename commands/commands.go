@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"github.com/covertbert/iex-cli/markets"
 	"github.com/covertbert/iex-cli/refdata"
 	"github.com/covertbert/iex-cli/stock"
 	"github.com/urfave/cli"
@@ -84,6 +85,15 @@ var CliCommands = []cli.Command{
 		Usage:   "view upcoming IPO information",
 		Action: func(c *cli.Context) error {
 			stock.QueryIPO()
+			return nil
+		},
+	},
+	{
+		Name:    "markets",
+		Aliases: []string{"m"},
+		Usage:   "view a list of markets with volume",
+		Action: func(c *cli.Context) error {
+			markets.QueryMarkets()
 			return nil
 		},
 	},
