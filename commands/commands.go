@@ -104,4 +104,13 @@ var CliCommands = []cli.Command{
 			return nil
 		},
 	},
+	{
+		Name:    "sector",
+		Aliases: []string{"s"},
+		Usage:   "view each sector's performance for the current trading day",
+		Action: func(c *cli.Context) error {
+			stock.QuerySector()
+			return nil
+		},
+	},
 }
