@@ -97,10 +97,19 @@ var CliCommands = []cli.Command{
 	},
 	{
 		Name:    "peers",
-		Aliases: []string{"p"},
+		Aliases: []string{"pe"},
 		Usage:   "view a list of peer tickers",
 		Action: func(c *cli.Context) error {
 			stock.QueryPeers(c.Args().First())
+			return nil
+		},
+	},
+	{
+		Name:    "price",
+		Aliases: []string{"pr"},
+		Usage:   "view a symbol's current price",
+		Action: func(c *cli.Context) error {
+			stock.QueryPrice(c.Args().First())
 			return nil
 		},
 	},
