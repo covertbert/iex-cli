@@ -78,6 +78,15 @@ var CliCommands = []cli.Command{
 		},
 	},
 	{
+		Name:    "ipo",
+		Aliases: []string{"i"},
+		Usage:   "view upcoming IPO information",
+		Action: func(c *cli.Context) error {
+			stock.QueryIPO()
+			return nil
+		},
+	},
+	{
 		Name:    "news",
 		Aliases: []string{"n"},
 		Usage:   "view stock market news",
