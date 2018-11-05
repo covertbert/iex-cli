@@ -1,6 +1,6 @@
 # IEX CLI
 
-This is a command line interface for the IEX API written in Go. The IEX API returns data related to the IEX stock exchange.
+This is a command line interface for the Investors Exchange API written in Go. The IEX API returns data related to the IEX stock exchange.
 
 ## Usage
 Download the binary [here](https://github.com/covertbert/iex-cli/releases/tag/0.0.1) and make sure it is in your `$PATH`
