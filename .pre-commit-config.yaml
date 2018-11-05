@@ -1,7 +1,9 @@
-- repo: git://github.com/dnephin/pre-commit-golang
-  sha: HEAD
+repos:
+- repo: git://github.com/covertbert/pre-commit-golang
+  rev: v0.3.3
   hooks:
+    - id: go-build
+    - id: go-unit-tests
     - id: go-fmt
     - id: go-vet
     - id: go-lint
-    - id: go-unit-tests
