@@ -61,5 +61,5 @@ func formatHeadline(headline string) string {
 
 func formatSummary(summary string) string {
 	c := color.New(color.FgWhite).SprintfFunc()
-	return fmt.Sprintf("\n%v\n\n\n", c(strings.TrimSpace(summary)))
+	return fmt.Sprintf("\n%v\n\n", c(strings.TrimSpace(summary)))
 }
