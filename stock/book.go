@@ -156,6 +156,9 @@ func quoteTable(b Book) table.Writer {
 		{"Week 52 Low", b.Quote.Week52Low},
 		{"Ytd Change", b.Quote.YtdChange},
 	})
+
+	t.SortBy([]table.SortBy{{Number: 1, Mode: table.Asc}})
+
 	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
 	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
 	fmt.Println("\r")

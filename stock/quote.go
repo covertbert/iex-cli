@@ -113,6 +113,9 @@ func QueryQuote(symbol string) {
 		{"Week 52 Low", q.Week52Low},
 		{"Ytd Change", q.YtdChange},
 	})
+
+	t.SortBy([]table.SortBy{{Number: 1, Mode: table.Asc}})
+
 	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
 	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
 

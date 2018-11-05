@@ -124,10 +124,19 @@ var CliCommands = []cli.Command{
 	},
 	{
 		Name:    "sector",
-		Aliases: []string{"s"},
+		Aliases: []string{"se"},
 		Usage:   "view each sector's performance for the current trading day",
 		Action: func(c *cli.Context) error {
 			stock.QuerySector()
+			return nil
+		},
+	},
+	{
+		Name:    "stats",
+		Aliases: []string{"st"},
+		Usage:   "view a symbol's key stats",
+		Action: func(c *cli.Context) error {
+			stock.QueryKey(c.Args().First())
 			return nil
 		},
 	},
