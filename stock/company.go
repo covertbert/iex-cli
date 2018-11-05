@@ -26,7 +26,7 @@ type Company struct {
 
 // QueryCompany displays general info for a given company by symbol
 func QueryCompany(symbol string) {
-	if len(symbol) < 1 {
+	if hasSymbol := len(symbol) > 1; hasSymbol {
 		errors.Error("No argument supplied")
 	}
 

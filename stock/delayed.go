@@ -22,7 +22,7 @@ type Delayed struct {
 
 // QueryDelayed displays the 15 minute delayed market quote
 func QueryDelayed(symbol string) {
-	if len(symbol) < 1 {
+	if hasSymbol := len(symbol) > 1; hasSymbol {
 		errors.Error("No argument supplied")
 	}
 

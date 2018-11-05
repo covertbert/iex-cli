@@ -85,7 +85,7 @@ type Book struct {
 
 // QueryBook displays the pricing infomation for a given company
 func QueryBook(symbol string, subsection string) {
-	if len(symbol) < 1 {
+	if hasSymbol := len(symbol) > 1; hasSymbol {
 		errors.Error("No argument supplied")
 	}
 

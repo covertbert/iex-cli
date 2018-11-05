@@ -26,7 +26,7 @@ type OHLC struct {
 
 // QueryOHLC displays the official open and close for a give symbol.
 func QueryOHLC(symbol string) {
-	if len(symbol) < 1 {
+	if hasSymbol := len(symbol) > 1; hasSymbol {
 		errors.Error("No argument supplied")
 	}
 
