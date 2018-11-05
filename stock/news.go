@@ -39,7 +39,7 @@ func QueryNews(symbol string) {
 	err := json.Unmarshal(body, &n)
 
 	if err != nil {
-		errors.Error("Failed to unmarshal")
+		errors.Error("Failed to unmarshal", err)
 	}
 
 	for _, news := range *n {

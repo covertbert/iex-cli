@@ -35,7 +35,7 @@ func QueryCompany(symbol string) {
 	err := json.Unmarshal(body, &c)
 
 	if err != nil {
-		errors.Error("Failed to unmarshal")
+		errors.Error("Failed to unmarshal", err)
 	}
 
 	t := table.NewWriter()

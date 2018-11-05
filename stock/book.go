@@ -95,7 +95,7 @@ func QueryBook(symbol string, subsection string) {
 	err := json.Unmarshal(body, &b)
 
 	if err != nil {
-		errors.Error("Failed to unmarshal")
+		errors.Error("Failed to unmarshal", err)
 	}
 
 	switch subsection {

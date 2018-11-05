@@ -17,7 +17,7 @@ func Query(path string) []byte {
 	resp, err := httpClient.Get(baseURL + path)
 
 	if err != nil {
-		errors.Error("HTTP request to API failed")
+		errors.Error("HTTP request to API failed", err)
 	}
 
 	if resp.StatusCode != 200 {
@@ -27,7 +27,7 @@ func Query(path string) []byte {
 	body, err := ioutil.ReadAll(resp.Body)
 
 	if err != nil {
-		errors.Error("Failed to read response body")
+		errors.Error("Failed to read response body", err)
 	}
 
 	return body

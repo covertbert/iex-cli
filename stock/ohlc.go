@@ -35,7 +35,7 @@ func QueryOHLC(symbol string) {
 	err := json.Unmarshal(body, &o)
 
 	if err != nil {
-		errors.Error("Failed to unmarshal")
+		errors.Error("Failed to unmarshal", err)
 	}
 
 	t := table.NewWriter()

@@ -95,4 +95,13 @@ var CliCommands = []cli.Command{
 			return nil
 		},
 	},
+	{
+		Name:    "peers",
+		Aliases: []string{"p"},
+		Usage:   "view a list of peer tickers",
+		Action: func(c *cli.Context) error {
+			stock.QueryPeers(c.Args().First())
+			return nil
+		},
+	},
 }
