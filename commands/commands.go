@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"github.com/covertbert/iex-cli/refdata"
 	"github.com/covertbert/iex-cli/stock"
 	"github.com/urfave/cli"
 )
@@ -146,6 +147,15 @@ var CliCommands = []cli.Command{
 		Usage:   "view a symbol's key stats",
 		Action: func(c *cli.Context) error {
 			stock.QueryKey(c.Args().First())
+			return nil
+		},
+	},
+	{
+		Name:    "symbols",
+		Aliases: []string{"sy"},
+		Usage:   "view a list of symbols",
+		Action: func(c *cli.Context) error {
+			refdata.QuerySymbols()
 			return nil
 		},
 	},

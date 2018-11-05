@@ -29,7 +29,7 @@ type Quote struct {
 	LatestTime            string  `json:"latestTime"`
 	LatestUpdate          int64   `json:"latestUpdate"`
 	LatestVolume          int     `json:"latestVolume"`
-	IexRealtimePrice      int     `json:"iexRealtimePrice"`
+	IexRealtimePrice      float64 `json:"iexRealtimePrice"`
 	IexRealtimeSize       int     `json:"iexRealtimeSize"`
 	IexLastUpdated        int64   `json:"iexLastUpdated"`
 	DelayedPrice          float64 `json:"delayedPrice"`
@@ -39,15 +39,15 @@ type Quote struct {
 	ExtendedChangePercent float64 `json:"extendedChangePercent"`
 	ExtendedPriceTime     int64   `json:"extendedPriceTime"`
 	PreviousClose         float64 `json:"previousClose"`
-	Change                int     `json:"change"`
-	ChangePercent         int     `json:"changePercent"`
-	IexMarketPercent      int     `json:"iexMarketPercent"`
-	IexVolume             int     `json:"iexVolume"`
-	AvgTotalVolume        int     `json:"avgTotalVolume"`
-	IexBidPrice           int     `json:"iexBidPrice"`
-	IexBidSize            int     `json:"iexBidSize"`
-	IexAskPrice           int     `json:"iexAskPrice"`
-	IexAskSize            int     `json:"iexAskSize"`
+	Change                float64 `json:"change"`
+	ChangePercent         float64 `json:"changePercent"`
+	IexMarketPercent      float64 `json:"iexMarketPercent"`
+	IexVolume             float64 `json:"iexVolume"`
+	AvgTotalVolume        float64 `json:"avgTotalVolume"`
+	IexBidPrice           float64 `json:"iexBidPrice"`
+	IexBidSize            float64 `json:"iexBidSize"`
+	IexAskPrice           float64 `json:"iexAskPrice"`
+	IexAskSize            float64 `json:"iexAskSize"`
 	MarketCap             int64   `json:"marketCap"`
 	PeRatio               float64 `json:"peRatio"`
 	Week52High            float64 `json:"week52High"`

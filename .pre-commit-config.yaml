@@ -3,7 +3,7 @@ repos:
   rev: v0.3.3
   hooks:
     - id: go-build
-    - id: go-unit-tests
     - id: go-fmt
     - id: go-vet
     - id: go-lint
+    - id: go-unit-tests
