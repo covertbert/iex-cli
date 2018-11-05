@@ -40,7 +40,7 @@ func TestDateStringToHumanReadable(t *testing.T) {
 		want string
 	}{
 		{
-			name: "Date string",
+			name: "Date strings",
 			args: args{
 				d: "2018-11-02T11:01:00-04:00",
 			},
