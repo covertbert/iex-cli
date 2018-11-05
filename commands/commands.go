@@ -114,6 +114,15 @@ var CliCommands = []cli.Command{
 		},
 	},
 	{
+		Name:    "quote",
+		Aliases: []string{"q"},
+		Usage:   "view a symbol's quote information",
+		Action: func(c *cli.Context) error {
+			stock.QueryQuote(c.Args().First())
+			return nil
+		},
+	},
+	{
 		Name:    "sector",
 		Aliases: []string{"s"},
 		Usage:   "view each sector's performance for the current trading day",

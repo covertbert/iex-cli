@@ -116,11 +116,11 @@ func quoteTable(b Book) table.Writer {
 	t.AppendHeader(table.Row{"Quote"})
 	t.AppendRows([]table.Row{
 		{"Symbol", b.Quote.Symbol},
-		{"CompanyName", b.Quote.CompanyName},
+		{"Company Name", b.Quote.CompanyName},
 		{"Market Cap", humanize.Comma(b.Quote.MarketCap)},
-		{"PrimaryExchange", b.Quote.PrimaryExchange},
+		{"Primary Exchange", b.Quote.PrimaryExchange},
 		{"Sector", utils.ReplaceEmptyValue(b.Quote.Sector)},
-		{"CalculationPrice", b.Quote.CalculationPrice},
+		{"Calculation Price", b.Quote.CalculationPrice},
 		{"Open", b.Quote.Open},
 		{"Open Time", utils.UNIXToHumanReadable(b.Quote.OpenTime)},
 		{"Close", b.Quote.Close},
