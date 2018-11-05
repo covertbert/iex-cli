@@ -18,7 +18,7 @@ func QueryPeers(symbol string) {
 		errors.Error("No argument supplied")
 	}
 
-	p := &Delayed{}
+	p := &Peers{}
 	body := iex.Query("/stock/" + symbol + "/peers")
 	err := json.Unmarshal(body, &p)
 
@@ -28,9 +28,13 @@ func QueryPeers(symbol string) {
 
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
-	t.AppendRow(table.Row{
-		*p,
-	})
+
+	for _, peer := range *p {
+		t.AppendRow(table.Row{
+			peer,
+		})
+	}
+
 	t.SetAllowedColumnLengths([]int{40, 40, 40, 40, 40, 40, 40, 40})
 	t.SetStyle(table.StyleColoredCyanWhiteOnBlack)
 
