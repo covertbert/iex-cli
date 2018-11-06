@@ -112,7 +112,7 @@ func openData(c Chart) *ui.LineChart {
 	lc.BorderFg = ui.ColorWhite
 	lc.Data = p
 	lc.DataLabels = dataLabels(c)
-	lc.Height = 20
+	lc.Height = 15
 	lc.X = 0
 	lc.Y = 0
 	lc.AxesColor = ui.ColorWhite
@@ -135,7 +135,7 @@ func closeData(c Chart) *ui.LineChart {
 	lc.BorderFg = ui.ColorWhite
 	lc.Data = p
 	lc.DataLabels = dataLabels(c)
-	lc.Height = 20
+	lc.Height = 15
 	lc.X = 0
 	lc.Y = 0
 	lc.AxesColor = ui.ColorWhite
@@ -158,7 +158,7 @@ func highData(c Chart) *ui.LineChart {
 	lc.BorderFg = ui.ColorWhite
 	lc.Data = p
 	lc.DataLabels = dataLabels(c)
-	lc.Height = 20
+	lc.Height = 15
 	lc.X = 0
 	lc.Y = 0
 	lc.AxesColor = ui.ColorWhite
@@ -181,7 +181,7 @@ func lowData(c Chart) *ui.LineChart {
 	lc.BorderFg = ui.ColorWhite
 	lc.Data = p
 	lc.DataLabels = dataLabels(c)
-	lc.Height = 20
+	lc.Height = 15
 	lc.X = 0
 	lc.Y = 0
 	lc.AxesColor = ui.ColorWhite
