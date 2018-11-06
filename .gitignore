@@ -1,2 +1,4 @@
 iex-cli
 .vscode
+vendor
+.DS_Store
