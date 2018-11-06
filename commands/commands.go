@@ -53,6 +53,15 @@ var CliCommands = []cli.Command{
 		},
 	},
 	{
+		Name:    "chart",
+		Aliases: []string{"c"},
+		Usage:   "view a symbol's chart",
+		Action: func(c *cli.Context) error {
+			stock.QueryChart(c.Args().First())
+			return nil
+		},
+	},
+	{
 		Name:    "company",
 		Aliases: []string{"c"},
 		Usage:   "view a symbol's general information",
