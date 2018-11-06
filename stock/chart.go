@@ -2,6 +2,8 @@ package stock
 
 import (
 	"encoding/json"
+	"fmt"
+	"strings"
 
 	"github.com/covertbert/iex-cli/errors"
 	"github.com/covertbert/iex-cli/iex"
@@ -44,13 +46,15 @@ func QueryChart(symbol string) {
 
 	defer ui.Close()
 
-	p := chartInformation()
+	h := chartHeader(symbol)
 	lo := openData(*c)
 	lc := closeData(*c)
 	lh := highData(*c)
 	ll := lowData(*c)
+	p := chartInformation()
 
 	ui.Body.AddRows(
+		ui.NewRow(ui.NewCol(10, 0, h)),
 		ui.NewRow(
 			ui.NewCol(5, 0, lo),
 			ui.NewCol(5, 0, lc),
@@ -73,6 +77,17 @@ func QueryChart(symbol string) {
 	ui.Loop()
 }
 
+func chartHeader(symbol string) *ui.Par {
+	i := ui.NewPar(fmt.Sprintf("Symbol: %v", strings.ToUpper(symbol)))
+	i.Height = 3
+	i.Width = 100
+	i.TextFgColor = ui.ColorWhite
+	i.BorderLabel = "OHLC charts"
+	i.BorderFg = ui.ColorWhite
+
+	return i
+}
+
 func chartInformation() *ui.Par {
 	i := ui.NewPar(":PRESS q TO QUIT")
 	i.Height = 3
@@ -93,7 +108,7 @@ func openData(c Chart) *ui.LineChart {
 	}
 
 	lc := ui.NewLineChart()
-	lc.BorderLabel = "Open data"
+	lc.BorderLabel = "Open"
 	lc.BorderFg = ui.ColorWhite
 	lc.Data = p
 	lc.DataLabels = dataLabels(c)
@@ -116,7 +131,7 @@ func closeData(c Chart) *ui.LineChart {
 	}
 
 	lc := ui.NewLineChart()
-	lc.BorderLabel = "Close data"
+	lc.BorderLabel = "Close"
 	lc.BorderFg = ui.ColorWhite
 	lc.Data = p
 	lc.DataLabels = dataLabels(c)
@@ -139,7 +154,7 @@ func highData(c Chart) *ui.LineChart {
 	}
 
 	lc := ui.NewLineChart()
-	lc.BorderLabel = "High data"
+	lc.BorderLabel = "High"
 	lc.BorderFg = ui.ColorWhite
 	lc.Data = p
 	lc.DataLabels = dataLabels(c)
@@ -162,7 +177,7 @@ func lowData(c Chart) *ui.LineChart {
 	}
 
 	lc := ui.NewLineChart()
-	lc.BorderLabel = "Low data"
+	lc.BorderLabel = "Low"
 	lc.BorderFg = ui.ColorWhite
 	lc.Data = p
 	lc.DataLabels = dataLabels(c)
