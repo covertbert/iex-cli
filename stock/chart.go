@@ -5,6 +5,7 @@ import (
 
 	"github.com/covertbert/iex-cli/errors"
 	"github.com/covertbert/iex-cli/iex"
+	"github.com/covertbert/iex-cli/utils"
 	ui "github.com/gizak/termui"
 )
 
@@ -48,9 +49,9 @@ func QueryChart(symbol string) {
 
 	ui.Body.AddRows(
 		ui.NewRow(
-			ui.NewCol(8, 0, p)),
+			ui.NewCol(5, 0, p)),
 		ui.NewRow(
-			ui.NewCol(8, 0, lc)))
+			ui.NewCol(5, 0, lc)))
 
 	ui.Body.Align()
 
@@ -69,7 +70,7 @@ func lineChart(c Chart) *ui.LineChart {
 	lc.BorderFg = ui.ColorWhite
 	lc.Data = dataPoints(c)
 	lc.DataLabels = dataLabels(c)
-	lc.Width = 100
+	// lc.Width = 80
 	lc.Height = 20
 	lc.X = 0
 	lc.Y = 0
@@ -97,7 +98,6 @@ func dataPoints(c Chart) []float64 {
 	for _, element := range c {
 		p = append(p, element.Close)
 		p = append(p, element.Close)
-		p = append(p, element.Close)
 	}
 
 	return p
@@ -107,9 +107,9 @@ func dataLabels(c Chart) []string {
 	p := []string{}
 
 	for _, element := range c {
-		p = append(p, element.Date)
-		p = append(p, element.Date)
-		p = append(p, element.Date)
+		d := utils.ShortDate(element.Date)
+		p = append(p, d)
+		p = append(p, d)
 	}
 
 	return p

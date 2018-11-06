@@ -1,8 +1,9 @@
 package utils
 
 import (
-	"fmt"
 	"time"
+
+	"github.com/covertbert/iex-cli/errors"
 )
 
 // UNIXToHumanReadable converts a UNIX timestamp to human-readable 24 hour time
@@ -16,8 +17,21 @@ func DateStringToHumanReadable(d string) string {
 	t, err := time.Parse(layout, d)
 
 	if err != nil {
-		fmt.Println(err)
+		errors.Error("Failed to convert date string", err)
 	}
 
 	return t.Format(time.RFC1123)
+}
+
+// ShortDate trims the year from a date in yyyy-mm-dd format and returns
+// it in dd/mm format
+func ShortDate(d string) string {
+	layout := "2006-01-02"
+	t, err := time.Parse(layout, d)
+
+	if err != nil {
+		errors.Error("Failed to convert date string", err)
+	}
+
+	return t.Format("02/01")
 }

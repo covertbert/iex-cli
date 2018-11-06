@@ -69,3 +69,29 @@ func TestDateStringToHumanReadable(t *testing.T) {
 		})
 	}
 }
+
+func TestTrimYearFromDate(t *testing.T) {
+	type args struct {
+		d string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "Date string",
+			args: args{
+				d: "2018-11-12",
+			},
+			want: "12/11",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ShortDate(tt.args.d); got != tt.want {
+				t.Errorf("ShortDate() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
