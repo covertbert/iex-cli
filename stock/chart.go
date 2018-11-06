@@ -44,14 +44,23 @@ func QueryChart(symbol string) {
 
 	defer ui.Close()
 
-	lc := lineChart(*c)
 	p := chartInformation()
+	lo := openData(*c)
+	lc := closeData(*c)
+	lh := highData(*c)
+	ll := lowData(*c)
 
 	ui.Body.AddRows(
 		ui.NewRow(
-			ui.NewCol(5, 0, p)),
+			ui.NewCol(5, 0, lo),
+			ui.NewCol(5, 0, lc),
+		),
 		ui.NewRow(
-			ui.NewCol(5, 0, lc)))
+			ui.NewCol(5, 0, lh),
+			ui.NewCol(5, 0, ll),
+		),
+		ui.NewRow(ui.NewCol(10, 0, p)),
+	)
 
 	ui.Body.Align()
 
@@ -62,23 +71,6 @@ func QueryChart(symbol string) {
 	})
 
 	ui.Loop()
-}
-
-func lineChart(c Chart) *ui.LineChart {
-	lc := ui.NewLineChart()
-	lc.BorderLabel = "Close prices"
-	lc.BorderFg = ui.ColorWhite
-	lc.Data = dataPoints(c)
-	lc.DataLabels = dataLabels(c)
-	// lc.Width = 80
-	lc.Height = 20
-	lc.X = 0
-	lc.Y = 0
-	lc.AxesColor = ui.ColorWhite
-	lc.LineColor = ui.ColorBlue
-	lc.Mode = "dot"
-
-	return lc
 }
 
 func chartInformation() *ui.Par {
@@ -92,7 +84,30 @@ func chartInformation() *ui.Par {
 	return i
 }
 
-func dataPoints(c Chart) []float64 {
+func openData(c Chart) *ui.LineChart {
+	p := []float64{}
+
+	for _, element := range c {
+		p = append(p, element.Open)
+		p = append(p, element.Open)
+	}
+
+	lc := ui.NewLineChart()
+	lc.BorderLabel = "Open data"
+	lc.BorderFg = ui.ColorWhite
+	lc.Data = p
+	lc.DataLabels = dataLabels(c)
+	lc.Height = 20
+	lc.X = 0
+	lc.Y = 0
+	lc.AxesColor = ui.ColorWhite
+	lc.LineColor = ui.ColorYellow
+	lc.Mode = "dot"
+
+	return lc
+}
+
+func closeData(c Chart) *ui.LineChart {
 	p := []float64{}
 
 	for _, element := range c {
@@ -100,7 +115,65 @@ func dataPoints(c Chart) []float64 {
 		p = append(p, element.Close)
 	}
 
-	return p
+	lc := ui.NewLineChart()
+	lc.BorderLabel = "Close data"
+	lc.BorderFg = ui.ColorWhite
+	lc.Data = p
+	lc.DataLabels = dataLabels(c)
+	lc.Height = 20
+	lc.X = 0
+	lc.Y = 0
+	lc.AxesColor = ui.ColorWhite
+	lc.LineColor = ui.ColorBlue
+	lc.Mode = "dot"
+
+	return lc
+}
+
+func highData(c Chart) *ui.LineChart {
+	p := []float64{}
+
+	for _, element := range c {
+		p = append(p, element.High)
+		p = append(p, element.High)
+	}
+
+	lc := ui.NewLineChart()
+	lc.BorderLabel = "High data"
+	lc.BorderFg = ui.ColorWhite
+	lc.Data = p
+	lc.DataLabels = dataLabels(c)
+	lc.Height = 20
+	lc.X = 0
+	lc.Y = 0
+	lc.AxesColor = ui.ColorWhite
+	lc.LineColor = ui.ColorGreen
+	lc.Mode = "dot"
+
+	return lc
+}
+
+func lowData(c Chart) *ui.LineChart {
+	p := []float64{}
+
+	for _, element := range c {
+		p = append(p, element.Low)
+		p = append(p, element.Low)
+	}
+
+	lc := ui.NewLineChart()
+	lc.BorderLabel = "Low data"
+	lc.BorderFg = ui.ColorWhite
+	lc.Data = p
+	lc.DataLabels = dataLabels(c)
+	lc.Height = 20
+	lc.X = 0
+	lc.Y = 0
+	lc.AxesColor = ui.ColorWhite
+	lc.LineColor = ui.ColorRed
+	lc.Mode = "dot"
+
+	return lc
 }
 
 func dataLabels(c Chart) []string {
