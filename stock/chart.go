@@ -5,7 +5,7 @@ import (
 
 	"github.com/covertbert/iex-cli/errors"
 	"github.com/covertbert/iex-cli/iex"
-	ui "github.com/gizak/termui"
+	ui "github.com/covertbert/termui"
 )
 
 // Chart structure
@@ -43,44 +43,22 @@ func QueryChart(symbol string) {
 
 	defer ui.Close()
 
-	lc := lineChart(*c)
-	p := chartInformation()
-
-	ui.Body.AddRows(
-		ui.NewRow(
-			ui.NewCol(8, 0, p)),
-		ui.NewRow(
-			ui.NewCol(8, 0, lc)))
-
-	ui.Body.Align()
-
-	ui.Render(ui.Body)
-
-	ui.Handle("/sys/kbd/q", func(ui.Event) {
-		ui.StopLoop()
-	})
-
-	ui.Loop()
-}
-
-func lineChart(c Chart) *ui.LineChart {
 	lc := ui.NewLineChart()
 	lc.BorderLabel = "Close prices"
 	lc.BorderFg = ui.ColorWhite
-	lc.Data = dataPoints(c)
-	lc.DataLabels = dataLabels(c)
-	lc.Width = 100
+	lc.Data = dataPoints(*c)
+	lc.DataLabels = dataLabels(*c)
+	lc.Width = 80
 	lc.Height = 20
 	lc.X = 0
 	lc.Y = 0
 	lc.AxesColor = ui.ColorWhite
-	lc.LineColor = ui.ColorBlue
+	lc.LineColor["Close"] = ui.ColorBlue
+	lc.LineColor["Open"] = ui.ColorYellow
+	lc.LineColor["High"] = ui.ColorGreen
+	lc.LineColor["Low"] = ui.ColorRed
 	lc.Mode = "dot"
 
-	return lc
-}
-
-func chartInformation() *ui.Par {
 	i := ui.NewPar(":PRESS q TO QUIT")
 	i.Height = 3
 	i.Width = 100
@@ -88,27 +66,44 @@ func chartInformation() *ui.Par {
 	i.BorderLabel = "Keyboard shortcuts"
 	i.BorderFg = ui.ColorWhite
 
-	return i
+	ui.Body.AddRows(
+		ui.NewRow(
+			ui.NewCol(8, 0, i)),
+		ui.NewRow(
+			ui.NewCol(8, 0, lc)))
+
+	ui.Body.Align()
+
+	ui.Render(ui.Body)
+
+	ui.Handle("q", func(ui.Event) {
+		ui.StopLoop()
+	})
+
+	ui.Loop()
 }
 
-func dataPoints(c Chart) []float64 {
-	p := []float64{}
+func dataPoints(c Chart) map[string][]float64 {
+	ps := map[string][]float64{}
+	ps["Close"] = make([]float64, len(c))
+	ps["Open"] = make([]float64, len(c))
+	ps["High"] = make([]float64, len(c))
+	ps["Low"] = make([]float64, len(c))
 
-	for _, element := range c {
-		p = append(p, element.Close)
-		p = append(p, element.Close)
-		p = append(p, element.Close)
+	for i, point := range c {
+		ps["Close"][i] = point.Close
+		ps["Open"][i] = point.Open
+		ps["High"][i] = point.High
+		ps["Low"][i] = point.Low
 	}
 
-	return p
+	return ps
 }
 
 func dataLabels(c Chart) []string {
 	p := []string{}
 
 	for _, element := range c {
-		p = append(p, element.Date)
-		p = append(p, element.Date)
 		p = append(p, element.Date)
 	}
 

@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  digest = "1:20e84447a2f8555b014195aa52342b71adf4b40e8eb75abc4e620890a5de16d5"
+  name = "github.com/covertbert/termui"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "fede2b0a7496f62f701fff3ea518ffd0740cf580"
+  version = "v2.4.0"
+
+[[projects]]
   digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
@@ -26,14 +34,6 @@
   version = "v1.7.0"
 
 [[projects]]
-  digest = "1:0b98586be892040d424cdd4fb7e047f71ddfcdbfca59f975a4b4eb14b56ae33c"
-  name = "github.com/gizak/termui"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "bf53c5cbea3f372f745e1d8e4660e29f73d41517"
-  version = "v2.3.0"
-
-[[projects]]
   digest = "1:0e2b1c02a6bf43b9fa058fa19a6e8ff7b2ddbfb9c1727ff753d4ee174429bcf1"
   name = "github.com/jedib0t/go-pretty"
   packages = [
@@ -43,14 +43,6 @@
   pruneopts = "UT"
   revision = "a1e9986a42fbdb194644b7a96a7056234d3aa6c2"
   version = "v4.0.0"
-
-[[projects]]
-  branch = "master"
-  digest = "1:2eeeebccad4f052e6037527e86b8114c6bfd184a97f84d4449a5ea6ad202c216"
-  name = "github.com/maruel/panicparse"
-  packages = ["stack"]
-  pruneopts = "UT"
-  revision = "f20d4c4d746f810c9110e21928d4135e1f2a3efa"
 
 [[projects]]
   digest = "1:c658e84ad3916da105a761660dcaeb01e63416c8ec7bc62256a9b411a05fcd67"
@@ -147,9 +139,9 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/covertbert/termui",
     "github.com/dustin/go-humanize",
     "github.com/fatih/color",
-    "github.com/gizak/termui",
     "github.com/jedib0t/go-pretty/table",
     "github.com/jedib0t/go-pretty/text",
     "github.com/pkg/errors",
