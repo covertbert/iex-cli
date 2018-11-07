@@ -3,7 +3,10 @@ package stock
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
 	"strings"
+
+	e "errors"
 
 	"github.com/covertbert/iex-cli/errors"
 	"github.com/covertbert/iex-cli/iex"
@@ -33,7 +36,14 @@ func QueryChart(symbol string, rng string) {
 	}
 
 	c := &Chart{}
-	body := iex.Query(fmt.Sprintf("/stock/%v/chart/%v", symbol, rng))
+
+	path, err := queryPath(symbol, rng)
+
+	if err != nil {
+		errors.Error("Incorrect arguments passed to chart command", err)
+	}
+
+	body := iex.Query(path)
 
 	if err := json.Unmarshal(body, &c); err != nil {
 		errors.Error("Failed to unmarshal", err)
@@ -74,6 +84,26 @@ func QueryChart(symbol string, rng string) {
 	})
 
 	ui.Loop()
+}
+
+func queryPath(symbol string, rng string) (string, error) {
+	allowedRanges := []string{"5y", "2y", "1y", "ytd", "6m", "3m", "1m", "1d", ""}
+
+	for _, allowedRng := range allowedRanges {
+		if rng == allowedRng {
+			return fmt.Sprintf("/stock/%v/chart/%v", symbol, rng), nil
+		}
+	}
+
+	if len(rng) == 8 {
+		_, err := strconv.ParseInt(rng, 10, 64)
+		if err != nil {
+			return "", e.New("Range is not a valid 8 digit date. Must be in format yyyymmdd e.g. 20180129")
+		}
+		return fmt.Sprintf("/stock/%v/chart/date/%v", symbol, rng), nil
+	}
+
+	return "", e.New("Range is not valid. Run iex-cli chart --range for help")
 }
 
 func chartHeader(symbol string, rng string) *ui.Par {

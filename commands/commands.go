@@ -63,7 +63,7 @@ var CliCommands = []cli.Command{
 		Flags: []cli.Flag{
 			cli.StringFlag{
 				Name:  "range",
-				Usage: "Chart range - options: 5y, 2y, 1y, ytd, 6m, 3m, 1m, 1d, date/<UNIX Timestamp>, dynamic",
+				Usage: "Chart range - options: 5y, 2y, 1y, ytd, 6m, 3m, 1m, 1d, date/<yyyymmdd>",
 			},
 		},
 	},
