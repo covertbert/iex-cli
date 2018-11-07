@@ -9,16 +9,22 @@ var testChart = Chart{
 	{
 		Open:  1,
 		Close: 1,
+		High:  1,
+		Low:   1,
 		Date:  "2018-11-05",
 	},
 	{
 		Open:  2,
 		Close: 2,
+		High:  2,
+		Low:   2,
 		Date:  "2018-11-05",
 	},
 	{
 		Open:  3,
 		Close: 3,
+		High:  3,
+		Low:   3,
 		Date:  "2018-11-05",
 	},
 }
@@ -37,7 +43,7 @@ func Test_dataLabels(t *testing.T) {
 			args: args{
 				c: testChart,
 			},
-			want: []string{"05/11", "05/11", "05/11", "05/11", "05/11", "05/11"},
+			want: []string{"2018-11-05", "2018-11-05", "2018-11-05", "2018-11-05", "2018-11-05", "2018-11-05"},
 		},
 	}
 	for _, tt := range tests {

@@ -7,7 +7,6 @@ import (
 
 	"github.com/covertbert/iex-cli/errors"
 	"github.com/covertbert/iex-cli/iex"
-	"github.com/covertbert/iex-cli/utils"
 	ui "github.com/gizak/termui"
 )
 
@@ -28,13 +27,13 @@ type Chart []struct {
 }
 
 // QueryChart displays live chart information
-func QueryChart(symbol string) {
+func QueryChart(symbol string, rng string) {
 	if noSymbol := len(symbol) < 1; noSymbol {
 		errors.Error("No argument supplied")
 	}
 
 	c := &Chart{}
-	body := iex.Query("/stock/" + symbol + "/chart")
+	body := iex.Query(fmt.Sprintf("/stock/%v/chart/%v", symbol, rng))
 
 	if err := json.Unmarshal(body, &c); err != nil {
 		errors.Error("Failed to unmarshal", err)
@@ -46,7 +45,7 @@ func QueryChart(symbol string) {
 
 	defer ui.Close()
 
-	h := chartHeader(symbol)
+	h := chartHeader(symbol, rng)
 	lo := openData(*c)
 	lc := closeData(*c)
 	lh := highData(*c)
@@ -77,12 +76,14 @@ func QueryChart(symbol string) {
 	ui.Loop()
 }
 
-func chartHeader(symbol string) *ui.Par {
-	i := ui.NewPar(fmt.Sprintf("Symbol: %v", strings.ToUpper(symbol)))
+func chartHeader(symbol string, rng string) *ui.Par {
+	headerString := fmt.Sprintf("Range: %v", rng)
+
+	i := ui.NewPar(fmt.Sprintf("%v", headerString))
 	i.Height = 3
 	i.Width = 100
 	i.TextFgColor = ui.ColorWhite
-	i.BorderLabel = "OHLC charts"
+	i.BorderLabel = strings.ToUpper(symbol)
 	i.BorderFg = ui.ColorWhite
 
 	return i
@@ -195,7 +196,7 @@ func dataLabels(c Chart) []string {
 	p := []string{}
 
 	for _, element := range c {
-		d := utils.ShortDate(element.Date)
+		d := element.Date
 		p = append(p, d)
 		p = append(p, d)
 	}

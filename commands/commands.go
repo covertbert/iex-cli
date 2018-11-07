@@ -12,12 +12,12 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "book",
 		Aliases: []string{"b"},
-		Usage:   "view a symbol's book",
+		Usage:   "View a symbol's book",
 		Subcommands: []cli.Command{
 			{
 				Name:    "quote",
 				Aliases: []string{"q"},
-				Usage:   "view quote",
+				Usage:   "View quote",
 				Action: func(c *cli.Context) error {
 					stock.QueryBook(c.Args().First(), "quote")
 					return nil
@@ -26,7 +26,7 @@ var CliCommands = []cli.Command{
 			{
 				Name:    "bids",
 				Aliases: []string{"b"},
-				Usage:   "view bids",
+				Usage:   "View bids",
 				Action: func(c *cli.Context) error {
 					stock.QueryBook(c.Args().First(), "bids")
 					return nil
@@ -35,7 +35,7 @@ var CliCommands = []cli.Command{
 			{
 				Name:    "asks",
 				Aliases: []string{"a"},
-				Usage:   "view asks",
+				Usage:   "View asks",
 				Action: func(c *cli.Context) error {
 					stock.QueryBook(c.Args().First(), "asks")
 					return nil
@@ -44,7 +44,7 @@ var CliCommands = []cli.Command{
 			{
 				Name:    "trades",
 				Aliases: []string{"t"},
-				Usage:   "view trades",
+				Usage:   "View trades",
 				Action: func(c *cli.Context) error {
 					stock.QueryBook(c.Args().First(), "trades")
 					return nil
@@ -55,16 +55,22 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "chart",
 		Aliases: []string{"c"},
-		Usage:   "view a symbol's chart",
+		Usage:   "View a symbol's chart",
 		Action: func(c *cli.Context) error {
-			stock.QueryChart(c.Args().First())
+			stock.QueryChart(c.Args().First(), c.String("range"))
 			return nil
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "range",
+				Usage: "Chart range - options: 5y, 2y, 1y, ytd, 6m, 3m, 1m, 1d, date/<UNIX Timestamp>, dynamic",
+			},
 		},
 	},
 	{
 		Name:    "company",
 		Aliases: []string{"c"},
-		Usage:   "view a symbol's general information",
+		Usage:   "View a symbol's general information",
 		Action: func(c *cli.Context) error {
 			stock.QueryCompany(c.Args().First())
 			return nil
@@ -73,7 +79,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "crypto",
 		Aliases: []string{"cr"},
-		Usage:   "view cryptocurrency market information",
+		Usage:   "View cryptocurrency market information",
 		Action: func(c *cli.Context) error {
 			stock.QueryCrypto()
 			return nil
@@ -82,7 +88,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "delayed",
 		Aliases: []string{"d"},
-		Usage:   "view a symbol's 15 minute delayed market quote",
+		Usage:   "View a symbol's 15 minute delayed market quote",
 		Action: func(c *cli.Context) error {
 			stock.QueryDelayed(c.Args().First())
 			return nil
@@ -91,7 +97,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "ipo",
 		Aliases: []string{"i"},
-		Usage:   "view upcoming IPO information",
+		Usage:   "View upcoming IPO information",
 		Action: func(c *cli.Context) error {
 			stock.QueryIPO()
 			return nil
@@ -100,7 +106,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "markets",
 		Aliases: []string{"m"},
-		Usage:   "view a list of markets with volume",
+		Usage:   "View a list of markets with volume",
 		Action: func(c *cli.Context) error {
 			markets.QueryMarkets()
 			return nil
@@ -109,7 +115,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "news",
 		Aliases: []string{"n"},
-		Usage:   "view stock market news",
+		Usage:   "View stock market news",
 		Action: func(c *cli.Context) error {
 			stock.QueryNews(c.Args().First())
 			return nil
@@ -118,7 +124,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "ohlc",
 		Aliases: []string{"ohlc"},
-		Usage:   "view a symbol's official open and close",
+		Usage:   "View a symbol's official open and close",
 		Action: func(c *cli.Context) error {
 			stock.QueryOHLC(c.Args().First())
 			return nil
@@ -127,7 +133,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "peers",
 		Aliases: []string{"pe"},
-		Usage:   "view a list of peer tickers",
+		Usage:   "View a list of peer tickers",
 		Action: func(c *cli.Context) error {
 			stock.QueryPeers(c.Args().First())
 			return nil
@@ -136,7 +142,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "price",
 		Aliases: []string{"pr"},
-		Usage:   "view a symbol's current price",
+		Usage:   "View a symbol's current price",
 		Action: func(c *cli.Context) error {
 			stock.QueryPrice(c.Args().First())
 			return nil
@@ -145,7 +151,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "quote",
 		Aliases: []string{"q"},
-		Usage:   "view a symbol's quote information",
+		Usage:   "View a symbol's quote information",
 		Action: func(c *cli.Context) error {
 			stock.QueryQuote(c.Args().First())
 			return nil
@@ -154,7 +160,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "sector",
 		Aliases: []string{"se"},
-		Usage:   "view each sector's performance for the current trading day",
+		Usage:   "View each sector's performance for the current trading day",
 		Action: func(c *cli.Context) error {
 			stock.QuerySector()
 			return nil
@@ -163,7 +169,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "stats",
 		Aliases: []string{"st"},
-		Usage:   "view a symbol's key stats",
+		Usage:   "View a symbol's key stats",
 		Action: func(c *cli.Context) error {
 			stock.QueryKey(c.Args().First())
 			return nil
@@ -172,7 +178,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "symbols",
 		Aliases: []string{"sy"},
-		Usage:   "view a list of symbols",
+		Usage:   "View a list of symbols",
 		Action: func(c *cli.Context) error {
 			refdata.QuerySymbols()
 			return nil
