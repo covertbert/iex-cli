@@ -37,6 +37,10 @@ func QueryChart(symbol string, rng string) {
 
 	c := &Chart{}
 
+	if noData := len(*c) < 1; noData {
+		errors.Error("Currently no data for the specified rangeg")
+	}
+
 	path, err := queryPath(symbol, rng)
 
 	if err != nil {
