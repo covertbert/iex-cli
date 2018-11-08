@@ -37,10 +37,6 @@ func QueryChart(symbol string, rng string) {
 
 	c := &Chart{}
 
-	if noData := len(*c) < 1; noData {
-		errors.Error("Currently no data for the specified rangeg")
-	}
-
 	path, err := queryPath(symbol, rng)
 
 	if err != nil {
@@ -51,6 +47,10 @@ func QueryChart(symbol string, rng string) {
 
 	if err := json.Unmarshal(body, &c); err != nil {
 		errors.Error("Failed to unmarshal", err)
+	}
+
+	if noData := len(*c) < 1; noData {
+		errors.Error("Currently no data for the specified range")
 	}
 
 	if err := ui.Init(); err != nil {
