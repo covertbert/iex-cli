@@ -107,6 +107,10 @@ func queryPath(symbol string, rng string) (string, error) {
 }
 
 func chartHeader(symbol string, rng string) *ui.Par {
+	if noRangeSpecified := len(rng) == 0; noRangeSpecified {
+		rng = "default"
+	}
+
 	headerString := fmt.Sprintf("Range: %v", rng)
 
 	i := ui.NewPar(fmt.Sprintf("%v", headerString))

@@ -3,6 +3,8 @@ package stock
 import (
 	"reflect"
 	"testing"
+
+	"github.com/rendon/testcli"
 )
 
 var testChart = Chart{
@@ -182,5 +184,13 @@ func Test_queryPath(t *testing.T) {
 				t.Errorf("queryPath() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func TestChartNoArgs(t *testing.T) {
+	testcli.Run("../iex-cli", "chart")
+
+	if !testcli.StdoutContains("Error: No argument supplied") {
+		t.Fatalf("Expected %q to contain %q", testcli.Stdout(), "Error: No argument supplied")
 	}
 }
