@@ -7,17 +7,17 @@ Download the binary [here](https://github.com/covertbert/iex-cli/releases/tag/0.
 
 ## Usage examples
 ### Chart data
-View chart data for a specified symbol over a specified period of time. e.g. `iex-cli chart --range "1y" AAPL`.
+View chart data for a specified stock over a specified period of time. e.g. `iex-cli chart --range "1y" AAPL`.
 
 ![Chart Screenshot](docs/screenshots/ohlc-chart.png?raw=true "Chart Screenshot")
 
 ### Key Statistics
-View key statistics for a symbol with `iex-cli stats AAPL`.
+View key statistics for a stock with `iex-cli stats AAPL`.
 
 ![Chart Screenshot](docs/screenshots/stats.png?raw=true "Chart Screenshot")
 
 ### News
-View general news with `iex-cli news` or symbol-specific news with `iex-cli news AAPL`.
+View general news with `iex-cli news` or stock-specific news with `iex-cli news AAPL`.
 
 ![Chart Screenshot](docs/screenshots/news.png?raw=true "Chart Screenshot")
 

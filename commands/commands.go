@@ -12,7 +12,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "book",
 		Aliases: []string{"b"},
-		Usage:   "View a symbol's book",
+		Usage:   "View a stock's book",
 		Subcommands: []cli.Command{
 			{
 				Name:    "quote",
@@ -55,7 +55,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "chart",
 		Aliases: []string{"c"},
-		Usage:   "View a symbol's chart",
+		Usage:   "View a stock's chart",
 		Action: func(c *cli.Context) error {
 			stock.QueryChart(c.Args().First(), c.String("range"))
 			return nil
@@ -70,7 +70,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "company",
 		Aliases: []string{"c"},
-		Usage:   "View a symbol's general information",
+		Usage:   "View a stock's general information",
 		Action: func(c *cli.Context) error {
 			stock.QueryCompany(c.Args().First())
 			return nil
@@ -88,7 +88,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "delayed",
 		Aliases: []string{"d"},
-		Usage:   "View a symbol's 15 minute delayed market quote",
+		Usage:   "View a stock's 15 minute delayed market quote",
 		Action: func(c *cli.Context) error {
 			stock.QueryDelayed(c.Args().First())
 			return nil
@@ -124,7 +124,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "ohlc",
 		Aliases: []string{"ohlc"},
-		Usage:   "View a symbol's official open and close",
+		Usage:   "View a stock's official open and close",
 		Action: func(c *cli.Context) error {
 			stock.QueryOHLC(c.Args().First())
 			return nil
@@ -142,7 +142,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "price",
 		Aliases: []string{"pr"},
-		Usage:   "View a symbol's current price",
+		Usage:   "View a stock's current price",
 		Action: func(c *cli.Context) error {
 			stock.QueryPrice(c.Args().First())
 			return nil
@@ -151,7 +151,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "quote",
 		Aliases: []string{"q"},
-		Usage:   "View a symbol's quote information",
+		Usage:   "View a stock's quote information",
 		Action: func(c *cli.Context) error {
 			stock.QueryQuote(c.Args().First())
 			return nil
@@ -169,7 +169,7 @@ var CliCommands = []cli.Command{
 	{
 		Name:    "stats",
 		Aliases: []string{"st"},
-		Usage:   "View a symbol's key stats",
+		Usage:   "View a stock's key stats",
 		Action: func(c *cli.Context) error {
 			stock.QueryKey(c.Args().First())
 			return nil
