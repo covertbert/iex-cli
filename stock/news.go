@@ -30,10 +30,10 @@ func QueryNews(symbol string) {
 	var body []byte
 	n := &News{}
 
-	body = iex.Query("stock/market/news/last/5")
+	body = iex.Query("/stock/market/news/last/5")
 
 	if hasSymbol := len(symbol) > 1; hasSymbol {
-		body = iex.Query("stock/" + symbol + "/news/last/5")
+		body = iex.Query("/stock/" + symbol + "/news/last/5")
 	}
 
 	err := json.Unmarshal(body, &n)

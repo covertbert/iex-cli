@@ -87,11 +87,26 @@ var CliCommands = []cli.Command{
 	},
 	{
 		Name:    "delayed",
-		Aliases: []string{"d"},
+		Aliases: []string{"de"},
 		Usage:   "View a stock's 15 minute delayed market quote",
 		Action: func(c *cli.Context) error {
 			stock.QueryDelayed(c.Args().First())
 			return nil
+		},
+	},
+	{
+		Name:    "dividends",
+		Aliases: []string{"di"},
+		Usage:   "View a stock's dividends",
+		Action: func(c *cli.Context) error {
+			stock.QueryDividends(c.Args().First(), c.String("range"))
+			return nil
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "range",
+				Usage: "Chart range - options: 5y, 2y, 1y, ytd, 6m, 3m, 1m",
+			},
 		},
 	},
 	{

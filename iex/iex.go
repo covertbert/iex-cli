@@ -8,7 +8,7 @@ import (
 	"github.com/covertbert/iex-cli/errors"
 )
 
-const baseURL = "https://api.iextrading.com/1.0/"
+const baseURL = "https://api.iextrading.com/1.0"
 
 var httpClient = &http.Client{Timeout: 10 * time.Second}
 
