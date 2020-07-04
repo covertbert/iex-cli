@@ -3,7 +3,7 @@
 This is a command line interface for the [Investors Exchange API](https://iextrading.com/developer/docs/) written in Go. The IEX API returns data related to the IEX stock exchange.
 
 ## Installation
-Download the binary [here](https://github.com/covertbert/iex-cli/releases/tag/0.0.1) and make sure it is executable and in your `$PATH`.
+Download the binary [here](https://github.com/covertbert/iex-cli/tags) and make sure it is executable and in your `$PATH`.
 
 ## Usage examples
 ### Chart data
